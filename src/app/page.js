@@ -1,15 +1,17 @@
 /* eslint-disable react/no-unescaped-entities */
 
+import Card from "@/component/ui/Card";
+
 
 export default function Home() {
   return (
     <>
-     
+
       <main>
         <section className="container">
           <div className="py-4  rounded-lg p-4 md:p-12 min-h-[450px] bg-cover grid place-items-center grid-cols-12" style={{
-      backgroundImage:`url('/assets/images/cover.png')`,
-    }}>
+            backgroundImage: `url('/assets/images/cover.png')`,
+          }}>
             <div className="col-span-12 md:col-span-6">
               <h1 className="font-bold text-3xl md:text-5xl text-white">
                 Choose from thousands of recipes
@@ -57,7 +59,8 @@ export default function Home() {
                     <span>By: John Doe</span>
                   </div>
                 </div>
-                <div className="card">
+                <Card />
+                {/* <div className="card">
                   <img
                     src="https://source.unsplash.com/-YHSwy6uqvk/300x160"
                     className="rounded-md"
@@ -104,7 +107,7 @@ export default function Home() {
                     <span>⭐️ 5.0</span>
                     <span>By: John Doe</span>
                   </div>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>

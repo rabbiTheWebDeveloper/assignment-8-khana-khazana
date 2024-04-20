@@ -16,7 +16,7 @@ const NavBar = () => {
           <a href="/">Home</a>
         </li>
         <li className="py-2">
-          <a href="/">Recipe</a>
+          <a href="/recipe">Recipe</a>
         </li>
         <li className="py-2">
           <a href="/">About us</a>
