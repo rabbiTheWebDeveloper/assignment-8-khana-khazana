@@ -1,6 +1,5 @@
 "use server"
-
-import { createUser } from "@/db/queries";
+import { createUser, findByCredentials } from "@/db/queries";
 import { redirect } from "next/navigation";
 
 async function registerUser(formData) {
@@ -9,7 +8,20 @@ async function registerUser(formData) {
   console.log(user);
   redirect("/login");
 }
+async function loginUser(formData) {
+  try {
+    const cradintial = {}
+    cradintial.email = formData.get('email');
+    cradintial.password = formData.get('password');
+    const user = await findByCredentials(cradintial);
+    return user;
+  } catch (err) {
+    console.log(err);
+  }
 
+
+}
 export {
-  registerUser
+  registerUser,
+  loginUser
 }
