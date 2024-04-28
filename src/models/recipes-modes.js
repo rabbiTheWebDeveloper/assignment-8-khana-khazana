@@ -46,6 +46,10 @@ const schema = new Schema({
     type: [String],
     required: true
   }
+},
+{
+  timestamps: true,
+  versionKey:false
 })
 
 export const recipesModel = mongoose.models.recipes  ?? mongoose.model("recipes", schema)
