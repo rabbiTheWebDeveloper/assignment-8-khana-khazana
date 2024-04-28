@@ -23,7 +23,14 @@ const schema = new Schema(
     favourites: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'recipes'
-    }]
-}
+    }],
+    timestamp: {
+        type: Date,
+        default: Date.now
+    },
+    versionKey : false,
+},
+
+ 
 )
 export const usersModel = mongoose.models.users  ?? mongoose.model("users", schema)
