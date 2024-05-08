@@ -12,7 +12,7 @@ const page = async ({ params: { details } }) => {
   if (!recipeInfo){
     notFound()
   }
-  console.log(recipeInfo)
+
   return (
     <main>
       <RecipeDetails recipeInfo={recipeInfo} />

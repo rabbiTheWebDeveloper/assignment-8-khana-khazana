@@ -14,7 +14,7 @@ const LoginForm = () => {
     try{
       const formData = new FormData(event.currentTarget);
       const user =await loginUser(formData);
-      console.log(user);
+      // console.log(user);
       if(user){
         setAuth(user)
         router.push("/")

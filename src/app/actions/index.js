@@ -6,7 +6,7 @@ import { revalidatePath } from 'next/cache'
 async function registerUser(formData) {
   const user = Object.fromEntries(formData);
   const create = await createUser(user);
-  console.log(user);
+  // console.log(user);
   redirect("/login");
 }
 async function loginUser(formData) {
