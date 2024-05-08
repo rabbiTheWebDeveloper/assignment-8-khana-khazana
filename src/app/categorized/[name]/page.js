@@ -3,7 +3,16 @@ import Card from "@/component/ui/Card";
 import { getAllRecipes } from "@/db/queries";
 import { notFound } from "next/navigation";
 
+export async function generateMetadata({params}) {
 
+  const decodedName = decodeURIComponent(params?.name);
+
+  return {
+    title: `Recipie - ${decodedName}`,
+    description: decodedName,
+ 
+  }
+}
 
 const page = async ({ params }) => {
   const allRecipes = await getAllRecipes();
