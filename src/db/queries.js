@@ -11,6 +11,13 @@ async function getAllRecipes() {
   return replaceMongoIdInArray(recipes);
 }
 
+async function getAllRecipesCategory() {
+  await dbConnect();
+  const recipes = await recipesModel.find().lean();
+  const categories = Array.from(new Set(recipes.map(recipe => recipe.category)));
+  return categories;
+}
+
 async function getRecipeById(id) {
   await dbConnect();
   const recipe = await recipesModel.findById(id).lean();
@@ -29,6 +36,7 @@ async function findByCredentials(formData) {
 export  {
   getAllRecipes,
   getRecipeById,
+  getAllRecipesCategory,
   createUser,
   findByCredentials
 

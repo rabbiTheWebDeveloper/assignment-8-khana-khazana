@@ -3,11 +3,14 @@
 import Step from "@/component/ui/Step";
 import { getRecipeById } from "@/db/queries";
 import Image from "next/image";
+import { notFound } from "next/navigation";
 
 
 const page = async ({ params: { details } }) => {
   const recipeInfo = await getRecipeById(details);
-  console.log(recipeInfo)
+  if (!recipeInfo){
+    notFound()
+  }
   return (
     <main>
       <section>
