@@ -33,11 +33,11 @@ const LoginForm = () => {
     <form className="login-form" onSubmit={onSubmit}>
       <div>
         <label htmlFor="email">Email Address</label>
-        <input type="email" name="email" id="email" />
+        <input type="email" name="email" id="email" placeholder="Enter Email Address" />
       </div>
       <div>
         <label htmlFor="password">Password</label>
-        <input type="password" name="password" id="password" />
+        <input type="password" name="password" id="password" placeholder="Enter Password" />
       </div>
       <button
         type="submit"
