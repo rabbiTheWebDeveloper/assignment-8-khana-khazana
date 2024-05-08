@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import React, { useState, useTransition } from 'react';
 
 const Favourite = ({recipeId}) => {
-  const { auth, setAuth } = useAuth();
+  const { auth } = useAuth();
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
   const isInterested = auth && auth?.favourites?.find((id) => id === recipeId);
@@ -20,9 +20,11 @@ const Favourite = ({recipeId}) => {
     }
 };
 
-console.log(interested)
+console.log(auth?.favourites);
   return (
-    <div  className={`flex gap-2 text-gray-600 cursor-pointer ${interested ? "text-[#eb4a36] hover:text-[#eb4a36]" : ""}`}   onClick={() =>
+    <div  className={`flex gap-2  ${
+      interested && "bg-indigo-600 hover:bg-indigo-800"
+  }`}   onClick={() =>
       startTransition(() => {
           toggleInterest();
       })
