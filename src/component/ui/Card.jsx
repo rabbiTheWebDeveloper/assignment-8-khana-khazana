@@ -5,7 +5,7 @@ import Image from "next/image";
 
 const Card = ({recipe}) => {
   return (
-    <a href={`details/${recipe?.id}`} className="card">
+    <a href={`/details/${recipe?.id}`} className="card">
     <Image
       src={recipe?.thumbnail}
       className="rounded-md"
