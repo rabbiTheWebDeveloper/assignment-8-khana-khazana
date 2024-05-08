@@ -19,9 +19,18 @@ async function getAllRecipesCategory() {
 }
 
 async function getRecipeById(id) {
-  await dbConnect();
-  const recipe = await recipesModel.findById(id).lean();
-  return replaceMongoIdInObject(recipe);
+  try {
+    await dbConnect();
+    const recipe = await recipesModel.findById(id).lean();
+    if (!recipe) {
+      return false;
+    }
+    return replaceMongoIdInObject(recipe);
+  } catch (error) {
+    console.error(error);
+    return false;
+   
+  }
 }
 async function createUser(user) {
   await dbConnect();
