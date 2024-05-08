@@ -1,6 +1,7 @@
 "use server"
-import { createUser, findByCredentials } from "@/db/queries";
+import { createUser, findByCredentials, updateFavourite } from "@/db/queries";
 import { redirect } from "next/navigation";
+import { revalidatePath } from 'next/cache'
 
 async function registerUser(formData) {
   const user = Object.fromEntries(formData);
@@ -21,7 +22,17 @@ async function loginUser(formData) {
 
 
 }
+
+async function addFavourite(favoriteId, authId) {
+  try {
+      await updateFavourite(favoriteId, authId);
+  } catch(error) {
+      throw error;
+  }
+  revalidatePath(`/details/${favoriteId}`);
+}
 export {
   registerUser,
-  loginUser
+  loginUser,
+  addFavourite
 }

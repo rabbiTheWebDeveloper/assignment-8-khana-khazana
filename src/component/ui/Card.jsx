@@ -1,11 +1,12 @@
 /* eslint-disable react/no-unescaped-entities */
 
 import Image from "next/image";
+import Link from "next/link";
 
 
 const Card = ({recipe}) => {
   return (
-    <a href={`/details/${recipe?.id}`} className="card">
+    <Link href={`/details/${recipe?.id}`} className="card">
     <Image
       src={recipe?.thumbnail}
       className="rounded-md"
@@ -19,7 +20,7 @@ const Card = ({recipe}) => {
       <span>⭐️ {recipe?.rating}.0</span>
       <span>By: {recipe?.author}</span>
     </div>
-  </a>
+  </Link>
   );
 };
 

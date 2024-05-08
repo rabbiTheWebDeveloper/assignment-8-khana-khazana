@@ -8,13 +8,13 @@ const NavBar = () => {
   return (
     <nav>
       <div className="container flex justify-between py-6">
-        <a href="/">
+        <Link href="/">
           <Image
             src={Logo}
             alt=""
             className="object-cover h-[40px]"
           />
-        </a>
+        </Link>
         <ul className="flex gap-4 text-sm text-gray-500">
           <li className="py-2 active">
             <Link href="/">Home</Link>

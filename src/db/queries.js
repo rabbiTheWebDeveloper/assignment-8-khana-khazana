@@ -3,6 +3,7 @@ import { dbConnect } from "@/services/mongo";
 import { replaceMongoIdInArray, replaceMongoIdInObject } from "@/utils/data-util";
 
 const { recipesModel } = require("@/models/recipes-modes");
+import mongoose from "mongoose";
 
 async function getAllRecipes() {
   await dbConnect();
@@ -42,11 +43,30 @@ async function findByCredentials(formData) {
   const user = await usersModel.findOne(formData).lean();
   return replaceMongoIdInObject(user);
 }
+
+
+async function updateFavourite(favoriteId, authId) {
+
+  const user = await usersModel.findById(authId);
+
+  if (user) {
+      const foundUsers = user.favourites.find(id => id.toString() === favoriteId);
+
+      if(foundUsers) {
+        user.favourites.pull(new mongoose.Types.ObjectId(favoriteId));
+      } else {
+        user.favourites.push(new mongoose.Types.ObjectId(favoriteId));
+      }
+
+      user.save();
+  }
+}
 export  {
   getAllRecipes,
   getRecipeById,
   getAllRecipesCategory,
   createUser,
-  findByCredentials
+  findByCredentials,
+  updateFavourite
 
 }
