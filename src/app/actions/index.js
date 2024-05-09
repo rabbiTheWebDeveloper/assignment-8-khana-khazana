@@ -29,7 +29,8 @@ async function addFavourite(favoriteId, authId) {
   } catch(error) {
       throw error;
   }
-  revalidatePath(`/details/${favoriteId}`);
+  // revalidatePath(`/details/${favoriteId}`);
+  revalidatePath(`/`);
 }
 export {
   registerUser,

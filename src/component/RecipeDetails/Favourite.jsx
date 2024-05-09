@@ -1,55 +1,46 @@
-"use client"
-import { addFavourite } from '@/app/actions';
-import useAuth from '@/hooks/useAuth';
-import { useRouter } from 'next/navigation';
-import React, { useState, useTransition } from 'react';
+"use client";
 
-const Favourite = ({recipeId}) => {
-  const { auth, setAuth } = useAuth();
-  const router = useRouter();
-  const [isPending, startTransition] = useTransition();
-  const isInterested = auth && auth?.favourites?.find((id) => id === recipeId);
-  const [interested, setInterested] = useState(isInterested);
+import Link from "next/link";
+import { useState } from "react";
 
-  const toggleInterest = async () => {
-    if (auth) {
-      addFavourite(recipeId, auth?.id);
-        setInterested(!interested);
-    } else {
-        router.push("/login");
-    }
-};
+import { useRouter } from "next/navigation";
+import { useTransition } from "react";
+import { addFavourite } from "@/app/actions";
+import useAuth from "@/hooks/useAuth";
 
-console.log(interested)
-console.log(recipeId)
-console.log(isInterested)
-console.log(auth)
-  return (
-    <div  className={`flex gap-2 text-gray-600 cursor-pointer  ${
-      interested && " text-[#eb4a36] hover:text-[#eb4a36]"
-  }`}    onClick={() =>
-      startTransition(() => {
-          toggleInterest();
-      })
-  }>
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width={24}
-      height={24}
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth={2}
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className="icon icon-tabler icons-tabler-outline icon-tabler-heart"
-    >
-      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-      <path d="M19.5 12.572l-7.5 7.428l-7.5 -7.428a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572" />
-    </svg>
-    <span>{interested ? "Favourited" : "Favourite"}</span>
-  </div>
-  );
+const  Favourite = ({ recipeId }) => {
+    const { auth } = useAuth();
+    const router = useRouter();
+    const isInterested = auth?.favourites?.find((id) => id === recipeId);
+    const [interested, setInterested] = useState(isInterested);
+    const [isPending, startTransition] = useTransition();
+    const toggleInterest = async () => {
+        if (auth) {
+          addFavourite(recipeId, auth?.id);
+            setInterested(!interested);
+        } else {
+            router.push("/login");
+        }
+    };
+    return (
+        <div className="flex gap-4 justify-end">
+            <button
+                onClick={() =>
+                    startTransition(() => {
+                        toggleInterest();
+                    })
+                }
+                className={`flex gap-2 cursor-pointer hover:text-[#eb4a36] ${interested ? "text-[#eb4a36]" : "text-gray-600"}`}>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    className="icon icon-tabler icons-tabler-outline icon-tabler-heart">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                    <path d="M19.5 12.572l-7.5 7.428l-7.5 -7.428a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572" />
+                </svg>
+                <span>Favourite</span>
+            </button>
+        </div>
+    );
 };
 
 export default Favourite;
